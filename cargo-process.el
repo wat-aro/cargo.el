@@ -64,7 +64,7 @@
   :group 'cargo)
 
 (defcustom cargo-process--custom-path-to-bin
-  (or (executable-find "cargo")
+  (or (executable-find "cargo" (and (fboundp 'tramp-tramp-file-p) (tramp-tramp-file-p (cargo-process--project-root))))
       (expand-file-name "cargo" "~/.cargo/bin")
       "/usr/local/bin/cargo")
   "Custom path to the cargo executable"
@@ -72,7 +72,7 @@
   :group 'cargo-process)
 
 (defcustom cargo-process--rustc-cmd
-  (or (executable-find "rustc")
+  (or (executable-find "rustc" (and (fboundp 'tramp-tramp-file-p) (tramp-tramp-file-p (cargo-process--project-root))))
       (expand-file-name "rustc" "~/.cargo/bin")
       "/usr/local/bin/rustc")
   "Custom path to the rustc executable"
